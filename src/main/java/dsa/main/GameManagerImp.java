@@ -93,7 +93,7 @@ public class GameManagerImp implements GameManager {
         User user = null;
         int numObjects;
         for(int i = 0; i<this.numUsers; i++) {
-            if(iduser.equals(this.users.get(iduser)){
+            if(iduser.equals(this.users.get(iduser))){
                 user = this.users.get(iduser);
             }
         }
