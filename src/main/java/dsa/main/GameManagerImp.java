@@ -112,6 +112,26 @@ public class GameManagerImp implements GameManager {
         return numObjects;
     }
 
+    //Update user
+    public User updateUser(User user) throws UserNotFoundException {
+        User theUser = this.users.get(user.getIduser());
+        if (user!=null) {
+            log.info(user + "is going to be updated.");
+
+            theUser.setName(user.getName());
+            theUser.setSurname(user.getSurname());
+
+
+            log.info(theUser + "has been updated.");
+        }
+        else {
+            log.error("The user doesn't exist.");
+            throw new UserNotFoundException();
+        }
+
+        return theUser;
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package dsa.main;
 
 import dsa.exceptions.UserNotFoundException;
 import dsa.models.Object;
+import dsa.models.User;
 
 import java.util.LinkedList;
 
@@ -45,6 +46,13 @@ public interface GameManager {
      * @throws UserNotFoundException
      */
     public int numObjects(String iduser) throws UserNotFoundException;
+
+    /**Update user
+     *
+      * @param p
+     * @return
+     */
+    public User updateUser(User p) throws UserNotFoundException;
 
 
 
