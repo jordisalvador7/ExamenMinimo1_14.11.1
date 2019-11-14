@@ -132,6 +132,31 @@ public class GameManagerImp implements GameManager {
         return theUser;
     }
 
+    //Consultar usuario
+    public User consultUser (User user) throws UserNotFoundException{
+        User theUser = this.users.get(user.getIduser());
+        String name;
+        String surname;
+        String iduser;
+
+        if (user!= null){
+            log.info("Información del usuario " + theUser);
+
+            iduser = theUser.getIduser();
+            name = theUser.getName();
+            surname = theUser.getSurname();
+
+            log.info("El id del usuario es: " + iduser + ", el nombre del usuario es: " + name + " y el apellido del usuario es: " + surname);
+        }
+
+        else {
+            log.error("El usuario no existe.");
+            throw new UserNotFoundException();
+        }
+
+        return theUser;
+    }
+
 
 
 

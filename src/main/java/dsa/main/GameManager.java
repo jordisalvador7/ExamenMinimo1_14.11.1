@@ -50,9 +50,16 @@ public interface GameManager {
     /**Update user
      *
       * @param p
-     * @return
+     * @return the updated user
      */
     public User updateUser(User p) throws UserNotFoundException;
+
+    /**Consultar informacion de un usuario
+     *
+     * @param user
+     * @throws UserNotFoundException
+     */
+    public User consultUser (User user) throws UserNotFoundException;
 
 
 
