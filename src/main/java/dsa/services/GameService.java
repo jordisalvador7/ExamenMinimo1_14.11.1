@@ -101,15 +101,15 @@ public class GameService {
         return Response.status(201).entity(u).build();
     }
 
-    //Get user objects
+    /*Get user objects
     @GET
     @ApiOperation(value = "Get the objects of a user", notes = "x")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successful", response= Object.class),
             @ApiResponse(code = 404, message = "User not found")
     })
-    @Path("/User/{id}/Objects")
-    public Response getObjectsUser(@PathParam("id") String id) throws UserNotFoundException {
+    @Path("/{id})
+    public Response getUserObjects(@PathParam("id") String id) throws UserNotFoundException {
         User user = this.gm.getUser(id);
         if(user == null) return Response.status(404).build();
         else{
@@ -117,8 +117,7 @@ public class GameService {
             GenericEntity<List<Object>> entity = new GenericEntity<List<Object>>(object) {};
             return Response.status(201).entity(entity).build() ;
         }
-    }
-
+    }*/
 
     /*Add object to a user
     @PUT
@@ -127,15 +126,17 @@ public class GameService {
             @ApiResponse(code = 201, message = "Successful",response = Object.class),
             @ApiResponse(code = 404, message = "User not found")
     })
-    @Path("/User/{id}")
-    public Response enrollStudent(@PathParam("id") String id, Object obj) {
+    @Path("/User/{id}/{object}/{description}")
+    public Response addNewObject (@PathParam("id") String id, @PathParam("object") String id_obj, @PathParam("description") String description) throws UserNotFoundException {
 
         User u = this.gm.getUser(id);
 
+        Object obj = new Object (id_obj, description);
+
         if (u == null) return Response.status(404).build();
         else {
-            this.gm.addObjectToUser(id,obj.getIdObject(),obj.getDescription());
-            return Response.status(201).entity(u).build();
+            this.gm.addObjectToUser(id, obj);
+            return Response.status(201).entity(obj).build();
         }
     }*/
 
