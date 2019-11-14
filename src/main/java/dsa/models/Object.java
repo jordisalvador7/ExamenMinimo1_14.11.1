@@ -3,15 +3,15 @@ package dsa.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
-public class Object {
+public class Object implements Comparable <Object>{
 
     //Atributes
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     private int id;
 
-    String idObject;
-    String description;
+    public String idObject;
+    public String description;
 
     //Constructor vacío para Json
     public Object(){
@@ -45,6 +45,15 @@ public class Object {
     @JsonIgnore
     @ApiModelProperty(hidden = true)
     public String getObjectid() {
+        return this.idObject;
+    }
+
+    @Override
+    public int compareTo(Object object) {
+        return 0;
+    }
+
+    public String toString(){
         return this.idObject;
     }
 }

@@ -1,11 +1,13 @@
 package dsa.models;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.util.LinkedList;
-
-public class User {
+public class User implements Comparable<User>{
 
     //Atributes
     public String iduser;
@@ -14,7 +16,7 @@ public class User {
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    LinkedList<Object> objects;
+    List<Object> objects;
 
 
     //Constructor vacio para json
@@ -57,25 +59,32 @@ public class User {
         this.surname = surname;
     }
 
-    public LinkedList<Object> getObjects(){
+    public List<Object> getObjects(){
         return objects;
     }
 
-    public void setObjects(LinkedList<Object> objects){
+    public void setObjects(List<Object> objects){
         this.objects = objects;
 
     }
 
     //Add an object
     public void addObject (Object object){
-        objects.add(object);
+        this.objects.add(object);
     }
 
     //Get number of objects owned by user
-    @JsonIgnore
-    @ApiModelProperty(hidden = true)
+
     public int getNumObjects() {
         return this.objects.size();
     }
 
+    @Override
+    public int compareTo(User user) {
+        return this.surname.compareTo(user.surname);
+    }
+
+    public String toString(){
+        return this.name;
+    }
 }
