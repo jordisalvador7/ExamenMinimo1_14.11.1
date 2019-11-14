@@ -9,14 +9,18 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class FirstTest {
     GameManager gm;
 
+    final static Logger log = Logger.getLogger(GameManagerImp.class.getName());
+
     @Before
-    public void SetUp() {
+    public void SetUp() throws UserNotFoundException {
         gm = GameManagerImp.getInstance();
 
         this.gm.addUser("010","Ansu","Fati");
@@ -67,8 +71,23 @@ public class FirstTest {
     public void testModifyUser() throws UserNotFoundException {
 
         this.gm.updateUser("011","Todibo","GOAT");
-        Assert.assertEquals("GOAT",this.gm.getUser("011").getSurname());    }
+        Assert.assertEquals("GOAT",this.gm.getUser("011").getSurname());
+    }
 
+    @Test
+    public void testModifyUserException() throws UserNotFoundException {
+
+        try{
+
+            this.gm.updateUser("015","Todibo","GOAT");
+        }
+
+        catch (UserNotFoundException e){
+            log.error("Error: " + e.getMessage());
+        }
+
+
+    }
 
 
     @After

@@ -1,5 +1,6 @@
 package dsa.main;
 
+import dsa.exceptions.UserNotFoundException;
 import dsa.models.Object;
 import dsa.models.User;
 import org.apache.log4j.Logger;
@@ -49,27 +50,48 @@ public class GameManagerImp implements GameManager {
     }
 
     //Info del usuario
-    public User getUser( String iduser){
-        return users.get(iduser);
+    public User getUser( String iduser) throws UserNotFoundException{
+        User user = users.get(iduser);
+        if(user != null) {
+            return users.get(iduser);
+        }
+        else{
+            log.error("User not found");
+            throw new UserNotFoundException();
+        }
     }
     //Get objects of a user
-    public int getObjectsOfUser(String userId){
+    public int getObjectsOfUser(String userId) throws UserNotFoundException {
 
-        User user =users.get(userId);
-        log.info(user.getObjects());
-        return user.getObjects().size();
+        User user = users.get(userId);
+
+        if(user != null) {
+            log.info(user.getObjects());
+            return user.getObjects().size();
+        }
+        else {
+            log.error("User not found");
+            throw new UserNotFoundException();
+        }
     }
 
     @Override
-    public void addObjectToUser(String iduser, Object object) {
+    public void addObjectToUser(String iduser, Object object) throws UserNotFoundException {
         User user =users.get(iduser);
-        user.addObject(object);
-        log.info("El usuario " + user + " tiene los siguientes objetos: " + user.getObjects());
+        if (user != null) {
+            user.addObject(object);
+            log.info("El usuario " + user + " tiene los siguientes objetos: " + user.getObjects());
+        }
+        else{
+            log.error("User not found");
+            throw new UserNotFoundException();
+        }
+
 
     }
 
     //Update user
-    public void updateUser(String iduser, String name, String surname){
+    public void updateUser(String iduser, String name, String surname) throws UserNotFoundException{
 
         User user = this.users.get(iduser);
         if (user != null) {
@@ -86,6 +108,7 @@ public class GameManagerImp implements GameManager {
 
         else {
             log.error("El usuario no existe.");
+            throw new UserNotFoundException();
 
         }
     }
@@ -100,14 +123,6 @@ public class GameManagerImp implements GameManager {
         log.info(userList);
         return userList;
     }
-
-    /*@Override
-    public Object getObject(String object) {
-        for (Object obj : this.objectsUser) {
-            if (obj.idObject.equals(object)) return obj;
-        }
-        return null;
-    }*/
 
     public void clear() {
         instance = null;

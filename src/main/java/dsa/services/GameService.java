@@ -1,5 +1,6 @@
 package dsa.services;
 
+
 import dsa.exceptions.UserNotFoundException;
 import dsa.models.Object;
 import dsa.models.User;
@@ -119,7 +120,7 @@ public class GameService {
     }
 
 
-    //Add object to a user
+    /*Add object to a user
     @PUT
     @ApiOperation(value = "Add an object to a user", notes = "x")
     @ApiResponses(value = {
@@ -127,7 +128,7 @@ public class GameService {
             @ApiResponse(code = 404, message = "User not found")
     })
     @Path("/User/{id}")
-    public Response enrollStudent(@PathParam("id") String id, Object obj) throws UserNotFoundException {
+    public Response enrollStudent(@PathParam("id") String id, Object obj) {
 
         User u = this.gm.getUser(id);
 
@@ -136,7 +137,7 @@ public class GameService {
             this.gm.addObjectToUser(id,obj.getIdObject(),obj.getDescription());
             return Response.status(201).entity(u).build();
         }
-    }
+    }*/
 
     //Update user
     @PUT
