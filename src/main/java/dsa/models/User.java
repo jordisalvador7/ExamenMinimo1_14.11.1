@@ -2,12 +2,10 @@ package dsa.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import sun.awt.image.ImageWatched;
 
 import java.util.LinkedList;
 
 public class User {
-
 
     //Atributes
     public String iduser;
@@ -16,7 +14,7 @@ public class User {
 
     @JsonIgnore
     @ApiModelProperty(hidden = true)
-    LinkedList<Object> userobjects;
+    LinkedList<Object> objects;
 
 
     //Constructor vacio para json
@@ -29,6 +27,7 @@ public class User {
         this.iduser = iduser;
         this.name = name;
         this.surname = surname;
+        this.objects = new LinkedList<>();
     }
 
     //Getters y setters
@@ -58,16 +57,25 @@ public class User {
         this.surname = surname;
     }
 
-    public void addObject(Object object){
-        userobjects.add(object);
+    public LinkedList<Object> getObjects(){
+        return objects;
     }
 
-    public LinkedList<Object> getUserobjects(){
-        return userobjects;
-    }
-
-    public void setUserobjects(LinkedList<Object> userobjects){
-        this.userobjects = userobjects;
+    public void setObjects(LinkedList<Object> objects){
+        this.objects = objects;
 
     }
+
+    //Add an object
+    public void addObject (Object object){
+        objects.add(object);
+    }
+
+    //Get number of objects owned by user
+    @JsonIgnore
+    @ApiModelProperty(hidden = true)
+    public int getNumObjects() {
+        return this.objects.size();
+    }
+
 }

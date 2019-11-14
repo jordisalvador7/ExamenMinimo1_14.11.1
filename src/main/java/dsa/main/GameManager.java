@@ -38,6 +38,14 @@ public interface GameManager {
      */
     public void addObject (String idObject, String description, String iduser) throws UserNotFoundException;
 
+    /**Numero de objetos de un usuario
+     *
+     * @param iduser
+     * @return number of objects of a user
+     * @throws UserNotFoundException
+     */
+    public int numObjects(String iduser) throws UserNotFoundException;
+
 
 
 

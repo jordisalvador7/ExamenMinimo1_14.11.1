@@ -15,16 +15,14 @@ public class GameManagerImp implements GameManager {
 
     //Implementacion fachada usando Singleton
     private static GameManager instance;
-    private final char u;
+
 
     private int numUsers;
-    private User arrayUsers[];
     private LinkedList<Object> objectsUser;
     private HashMap<String, User> users;
 
     private GameManagerImp(){
         numUsers = 0;
-        arrayUsers = new User[u];
         objectsUser = new LinkedList<>();
         users = new HashMap<>();
     }
@@ -51,7 +49,7 @@ public class GameManagerImp implements GameManager {
 
         if(theUser!=null){
             log.info("User: " + theUser);
-            objects = theUser.getUserobjects();
+            objects = theUser.getObjects();
         }
         else{
             log.error("The user doesn't exist");
@@ -72,21 +70,46 @@ public class GameManagerImp implements GameManager {
         User user = null;
         Object object;
         for(int i = 0; i<this.numUsers; i++) {
-            if(iduser.equals(this.arrayUsers[i].iduser)){
-                user = this.arrayUsers[i];
+            if(iduser.equals(this.users.get(iduser))){
+                user = this.users.get(iduser);
             }
         }
 
         log.info("User: " + user);
 
         if(user != null) {
-            LinkedList<Object> objects = user.getUserobjects();
+            LinkedList<Object> objects = user.getObjects();
             user.addObject(new Object(idObject, description));
         }
         else {
             log.error("The user doesn't exist");
             throw new UserNotFoundException();
         }
+    }
+
+    //Number of objects of a user
+    public int numObjects(String iduser) throws UserNotFoundException{
+        //We get the user that has this iduser
+        User user = null;
+        int numObjects;
+        for(int i = 0; i<this.numUsers; i++) {
+            if(iduser.equals(this.users.get(iduser)){
+                user = this.users.get(iduser);
+            }
+        }
+
+        log.info("idUser of this User: " + user.iduser);
+
+        if (user != null){
+            numObjects = user.getNumObjects();
+            log.info("Number of bikes of this station: " + numObjects);
+        }
+        else{
+            log.error("The user doesn't exist");
+            throw new UserNotFoundException();
+        }
+
+        return numObjects;
     }
 
 
